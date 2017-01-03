@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+set nocompatible              " Turn on vim "IM"proved features
 filetype off                  " required
 set encoding=utf-8
 " set the runtime path to include Vundle and initialize
@@ -22,7 +22,12 @@ Plugin 'scrooloose/syntastic'            " Syntax highlighting
 Plugin 'nvie/vim-flake8'                 " PEP8 Checking
 Plugin 'vim-latex/vim-latex'             " Latex bindings for Vim
 Plugin 'mattn/emmet-vim'                 " EMMET for Vim
-Plugin 'tpope/vim-markdown'              " Vim Markdown stuff
+Plugin 'thinca/vim-quickrun'             " Live reload
+Plugin 'sirver/ultisnips'                " Snippets and whatnot
+Plugin 'ervandew/supertab'               " Supertab to make YCM and ultisnips bind to TAB
+Plugin 'godlygeek/tabular'               " I'm just using this to easily encode current tables
+Plugin 'dhruvasagar/vim-table-mode'      " Perhaps a better table mode more like sublime
+Plugin 'tpope/vim-markdown'              " Tim Pope's Markdown syntax highlighting
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -30,12 +35,12 @@ call vundle#end()            " required
 " Back to normal programming
 filetype plugin indent on                " required
 
-" Enable fenced code block syntax highlighting in your markdown documents  
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-
 let python_highlight_all=1
 syntax on
 colorscheme Tomorrow-Night-Bright
+" Set Spelling error colours
+hi clear SpellBad
+hi SpellBad term=reverse cterm=bold ctermfg=0 ctermbg=81 gui=undercurl guisp=Red
 
 set colorcolumn=120
 let &colorcolumn=join(range(121,999),",")
@@ -67,12 +72,6 @@ set hidden
 set history=100
 
 set hlsearch                             " highlight search
-
-" Use Arrows to navigate
-map <D-A-RIGHT> <C-w>l
-map <D-A-LEFT> <C-w>h
-map <D-A-DOWN> <C-w><C-w>
-map <D-A-UP> <C-w>W
 
 " Open previously opened file by hitting comma twice
 nnoremap <Leader><Leader> :e#<CR>
@@ -114,5 +113,23 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Enable powerline-status
 set rtp+=/home/pierre/.local/lib/python3.5/site-packages/powerline/bindings/vim/
-set laststatus=2
-set t_Co=256
+set laststatus=2    " Always make powerline visible
+set t_Co=256        " Terminal colours
+
+" Check if Gvim - set font
+set guifont=Hack\ 12
+
+" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+" (via http://stackoverflow.com/a/22253548/1626737)
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Ultisnips folder for personal snippets
+let g:UltiSnipsSnippetDirectories=["personalsnippets"]
