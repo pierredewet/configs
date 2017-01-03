@@ -1,0 +1,72 @@
+snippet mdtitle "Insert Markdown title section"
+---
+title:  $1
+author: Pierre de Wet
+date:   `date +%d/%m/%Y`
+tags:   [`date +%d/%m/%Y`,$2]
+...
+
+# $1
+endsnippet 
+
+#
+#
+
+snippet workmtg "Headers for word markdown docs"
+---
+title: $1
+author: Pierre de Wet
+date: `date +%d/%m/%Y`
+tags: [$2,`date +%Y/%m/%d`, `date +%B`, `date +%m/%Y`]
+...
+
+# $1
+| ----------------------- | :------------------------------------------------- |
+| **Date:**               | `date +%Y/%m/%d`                                   |
+| **Attendees (Company):**| Pierre de Wet,$3                                   |
+| **Attendees ($2):**     | $4                                                 |
+| **Apologies:**          | $5                                                 |
+| ----------------------- | -------------------------------------------------- |
+
+
+## (NOTE: Action items and review should be listed in the ticketing system)
+
+## Notes
+$0
+
+## TODO
+1. 
+2. 
+3. 
+
+## Follow up
+endsnippet
+
+snippet mtg "Team Meeting Template"
+---
+Title: Team Meeting - `date +%d/%m/%Y`
+Tags:  [meeting, team meeting, `date +%d/%m/%Y`, `date +%m/%Y`, `date +%B`]
+...
+
+# Team meeting - `date +%d/%m/%Y`
+
+## Follow Up
+
+## This Week
+$1
+## NOTES
+$2
+endsnippet
+
+snippet bigdatalec "Big Data Lecture Template"
+---
+title: Big Data Lecture $1
+tags: [BIG_Data,MSc,Uni,lecture,DB Systems,`date +%b`, `date +%m/%Y`]
+...
+
+# Big Data Lecture: $1 - `date +%d/%m/%Y`
+
+## NOTES
+
+## TODO
+endsnippet
